@@ -1,0 +1,81 @@
+{
+    "namespace": "mv_title_toast",
+
+    "root_panel": {
+        "type": "panel",
+        "controls": [
+            {
+                "data_control": {
+                    "type": "panel",
+                    "size": [0, 0],
+                    "bindings": [
+                        { "binding_name": "#hud_title_text_string" },
+                        { "binding_name": "#hud_title_text_string", "binding_name_override": "#preserved_text", "binding_condition": "visibility_changed" },
+                        { "binding_type": "view", "source_property_name": "(not (#hud_title_text_string = #preserved_text) and not (('%.7s' * #hud_title_text_string) - ('%.5s' * #hud_title_text_string) = ('%.7s' * #hud_title_text_string)))", "target_property_name": "#visible" }
+                    ]
+                }
+            },
+            {
+                "toast_wrapper": {
+                    "type": "panel",
+                    "bindings": [
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "data_control",
+                            "resolve_sibling_scope": true,
+                            "source_property_name": "#preserved_text",
+                            "target_property_name": "#preserved_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "data_control",
+                            "resolve_sibling_scope": true,
+                            "source_property_name": "#visible",
+                            "target_property_name": "#data_vis"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((not #data_vis) and (not (#preserved_text = '')))",
+                            "target_property_name": "#visible"
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "toast_c": {
+                                "type": "image",
+                                "texture": "textures/ui/zeqa/common/toastBorder",
+                                "layer": 51,
+                                "size": ["100%cm +6px", "100%cm +12px"],
+                                "alpha": "@hud.toast_alpha_zeqa",
+                                "propagate_alpha": true,
+                                "offset": "@hud.zeqa_toast_offset_start",
+                                "anchor_from": "top_right",
+                                "anchor_to": "top_right",
+                                "controls": [
+                                    { "stack@common.horizontal_stack_panel": { "layer": 1, "size": ["100%c", "100%c"], "anchor_from": "bottom_middle", "anchor_to": "bottom_middle", "controls": [
+                                        { "icon_panel": { "type": "panel", "size": [28, 20], "controls": [
+                                            { "icon": { "type": "image", "texture": "textures/ui/common/minecoin", "size": [16, 16], "layer": 53 } }
+                                        ] } },
+                                        { "content@common.vertical_stack_panel": { "size": ["100%cm + 4px", 12], "anchor_from": "top_middle", "anchor_to": "top_middle", "controls": [
+                                            { "p@common.empty_panel": { "size": [0, -5] } },
+                                            { "l1": { "type": "label", "font_type": "default", "text_alignment": "center", "layer": 53, "anchor_from": "top_middle", "anchor_to": "top_middle", "shadow": true, "font_scale_factor": 0.65, "font_size": "large", "text": "#lineone", "bindings": [
+                                                { "binding_type": "view", "source_control_name": "data_control", "resolve_sibling_scope": true, "source_property_name": "#preserved_text", "target_property_name": "#preserved_text" },
+                                                { "binding_type": "view", "source_property_name": "(#preserved_text - ('%.7s' * #preserved_text))", "target_property_name": "#stripped" },
+                                                { "binding_type": "view", "source_property_name": "(('%.18s' * #stripped) - ('%.3s' * #stripped) - '/')", "target_property_name": "#lineone" }
+                                            ] } },
+                                            { "l2": { "type": "label", "font_type": "default", "text_alignment": "center", "color": "white", "layer": 53, "anchor_from": "top_middle", "anchor_to": "top_middle", "shadow": true, "text": "#linetwo", "bindings": [
+                                                { "binding_type": "view", "source_control_name": "data_control", "resolve_sibling_scope": true, "source_property_name": "#preserved_text", "target_property_name": "#preserved_text" },
+                                                { "binding_type": "view", "source_property_name": "(#preserved_text - ('%.7s' * #preserved_text))", "target_property_name": "#s2" },
+                                                { "binding_type": "view", "source_property_name": "(#s2 - ('%.18s' * #s2))", "target_property_name": "#linetwo" }
+                                            ] } }
+                                        ] } }
+                                    ] } }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

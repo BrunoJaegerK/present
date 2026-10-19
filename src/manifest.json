@@ -1,0 +1,20 @@
+{
+    "format_version": 2,
+    "metadata": {
+        "authors": ["zelisce", "Citicx", "8Crafter", "AxmBro"]
+    },
+    "header": {
+        "name": "MegaSMP [UI]",
+        "description": "UI Pack for MegaSMP",
+        "uuid": "2cdeded2-4813-4edd-baa1-c18a3e17f874",
+        "min_engine_version": [1, 21, 86],
+        "version": [26, 7, 25]
+    },
+    "modules": [
+        {
+            "type": "resources",
+            "uuid": "e3228c17-36ee-4003-8011-f5d1789cc7d0",
+            "version": [26, 7, 25]
+        }
+    ]
+}

@@ -1,0 +1,301 @@
+{
+  "third_party_server_screen@common.base_screen": {
+    "low_frequency_rendering": true,
+    "load_screen_immediately": true,
+    "$screen_content": "server_form.mineville_main_screen_content",
+    "$screen_animations|default": [
+      "@server_form.screen_exit_animation_push_offset",
+      "@server_form.screen_exit_animation_pop_offset",
+      "@server_form.screen_entrance_animation_push_offset",
+      "@server_form.screen_entrance_animation_pop_offset",
+      "@server_form.screen_exit_animation_push_fade",
+      "@server_form.screen_exit_animation_pop_fade",
+      "@server_form.screen_entrance_animation_push_fade",
+      "@server_form.screen_entrance_animation_pop_fade"
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "global"
+      }
+    ]
+  },
+  "mineville_main_screen_content": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "server_form_factory": {
+          "type": "factory",
+          "control_ids": {
+            "long_form": "@server_form.switching_long_form",
+            "custom_form": "@server_form.custom_form"
+          }
+        }
+      }
+    ]
+  },
+    "menu_slot_base": {
+    "type": "collection_panel",
+    "size": [ "100%", "100%" ],
+    "enabled": false,
+    "visible": false,
+    "collection_name": "mv_menu_slot",
+    "property_bag": { "#collection_length": [ "m" ] },
+    "bindings": [
+      { "binding_type": "view", "source_property_name": "$match_expr", "target_property_name": "#enabled" },
+      { "binding_type": "view", "source_property_name": "$match_expr", "target_property_name": "#visible" },
+      { "binding_type": "global", "binding_name": "#menu_slot_poll", "binding_name_override": "#collection_length" }
+    ]
+  },
+
+  "switching_long_form": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/long_form') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@long-form.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/city/claim_chunk_menu') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@city-menu-claim-chunk.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/city/create_city_menu') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@city-menu-create-city.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/city/own_chunk_menu') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@city-menu-own-chunk.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/other_main_menu') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@other-main-menu.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/crate_menu') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@crate-menu.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/bundle') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@crate_preview_v2.main" } } }
+      },
+      //{
+      //  "crate_preview@crate-preview.main": {
+      //    "enabled": false,
+      //    "visible": false,
+      //    "bindings": [
+      //     {
+      //       "binding_type": "view",
+      //       "source_property_name": "(not ((#title_text - '@mineville/crate_preview') = #title_text))",
+      //       "target_property_name": "#enabled"
+      //     },
+      //     {
+      //       "binding_type": "view",
+      //       "source_property_name": "(not ((#title_text - '@mineville/crate_preview') = #title_text))",
+      //       "target_property_name": "#visible"
+      //    }
+      //   ]
+      // }
+      // },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "((not ((#title_text - '@mineville/gamemodes_menu') = #title_text)) and ((#title_text - '@mineville/gamemodes_menu_v2') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@gamemodes-menu.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/gamemodes_menu_v2') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@gamemodes-menu-v2.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/earth-smp/rtp_menu') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@earth-smp-rtp.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/auction_house') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@auction-house.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/browser_ad' - '@mineville/gift:') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@browser-ad.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/inventory') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@inventory-form.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/trade') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@trade-form.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/orebits') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@orebits-form.main" } } }
+      },
+      {
+        "vanilla_long_form@common_dialogs.main_panel_no_buttons": {
+          "enabled": false,
+          "visible": false,
+          "$title_panel": "common_dialogs.standard_title_label",
+          "$title_size": ["100% - 15px", 10],
+          "$title_max_size": ["100% - 15px", 10],
+          "size": [225, 200],
+          "$text_name": "#title_text",
+          "$title_text_binding_type": "none",
+          "$child_control": "server_form.long_form_panel",
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_property_name": "((#title_text - '@mineville') = #title_text)",
+              "target_property_name": "#enabled"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((#title_text - '@mineville') = #title_text)",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/gaf_shop') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@gaf-shop.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/gaf/v2') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@gaf-shop-v2.main" } } }
+      },
+      {
+        "wardrobe_menu@doll-wardrobe.main": {
+          "enabled": false,
+         "visible": false,
+         "bindings": [
+           {
+             "binding_type": "view",
+             "source_property_name": "(not ((#title_text - '@mineville/dollwardrobe') = #title_text))",
+             "target_property_name": "#enabled"
+           },
+           {
+             "binding_type": "view",
+             "source_property_name": "(not ((#title_text - '@mineville/dollwardrobe') = #title_text))",
+             "target_property_name": "#visible"
+           }
+         ]
+        }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/progression' - '@mineville/pvp_progression') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@progression.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/treasurechest') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@treasurechest.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/gifting') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@gifting.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/details') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@details.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/store') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@store-form.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/ob_shop') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@store-orebits-form.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/boxes') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@boxes-form.main" } } }
+      }
+    ]
+  },
+  "custom_form": {
+    "controls": [
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/modal_form') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@modal-form.main" } } }
+      },
+      {
+        "menu_slot@server_form.menu_slot_base": { "$match_expr": "(not ((#title_text - '@mineville/wardrobe') = #title_text))", "factory": { "name": "menu_slot_factory", "control_ids": { "m": "@wardrobe.main" } } }
+      },
+      {
+        "vanilla_modal_form@common_dialogs.main_panel_no_buttons": {
+          "enabled": false,
+          "visible": false,
+          "$title_panel": "common_dialogs.standard_title_label",
+          "$title_size": ["100% - 15px", 10],
+          "$title_max_size": ["100% - 15px", 10],
+          "size": [225, 200],
+          "$text_name": "#title_text",
+          "$title_text_binding_type": "none",
+          "$child_control": "server_form.custom_form_panel",
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_property_name": "((#title_text - '@mineville') = #title_text)",
+              "target_property_name": "#enabled"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((#title_text - '@mineville') = #title_text)",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "screen_exit_animation_push_fade": {
+    "anim_type": "alpha",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_push",
+    "from": 0.0,
+    "to": 0.0,
+    "play_event": "screen.exit_push",
+    "end_event": "screen.exit_end"
+  },
+  "screen_exit_animation_pop_fade": {
+    "anim_type": "alpha",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_pop",
+    "from": 0.0,
+    "to": 0.0,
+    "play_event": "screen.exit_pop",
+    "end_event": "screen.exit_end"
+  },
+  "screen_entrance_animation_push_fade": {
+    "anim_type": "alpha",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_push",
+    "from": 1.0,
+    "to": 1.0,
+    "play_event": "screen.entrance_push",
+    "end_event": "screen.entrance_end"
+  },
+  "screen_entrance_animation_pop_fade": {
+    "anim_type": "alpha",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_pop",
+    "from": 1.0,
+    "to": 1.0,
+    "play_event": "screen.entrance_pop",
+    "end_event": "screen.entrance_end"
+  },
+  "screen_exit_animation_push_offset": {
+    "anim_type": "offset",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_push",
+    "from": [0, 0],
+    "to": [0, 0],
+    "play_event": "screen.exit_push",
+    "end_event": "screen.exit_end"
+  },
+  "screen_exit_animation_pop_offset": {
+    "anim_type": "offset",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_pop",
+    "from": [0, 0],
+    "to": [0, 0],
+    "play_event": "screen.exit_pop",
+    "end_event": "screen.exit_end"
+  },
+  "screen_entrance_animation_push_offset": {
+    "anim_type": "offset",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_push",
+    "from": [0, 0],
+    "to": [0, 0],
+    "play_event": "screen.entrance_push",
+    "end_event": "screen.entrance_end"
+  },
+  "screen_entrance_animation_pop_offset": {
+    "anim_type": "offset",
+    "easing": "out_cubic",
+    "duration": "$mv_transition_time_pop",
+    "from": [0, 0],
+    "to": [0, 0],
+    "play_event": "screen.entrance_pop",
+    "end_event": "screen.entrance_end"
+  }
+}

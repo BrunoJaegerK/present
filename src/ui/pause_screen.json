@@ -1,0 +1,500 @@
+{
+  "custom_store_button@common_buttons.light_content_button": {
+    "ignored": "$is_secondary_client",
+    "size": ["100% +2px", 32],
+    "$pressed_button_name": "button.menu_store",
+    "$default_button_texture": "textures/ui/common/buttons/dark/default",
+    "$hover_button_texture": "textures/ui/common/buttons/dark/hover",
+    "$pressed_button_texture": "textures/ui/common/buttons/dark/pressed",
+    "$button_content": "pause.custom_store_button_content",
+    "$border_default_alpha": 0,    "$border_alpha": 0,
+
+    "bindings": [
+      {
+        "binding_name": "#store_button_visible",
+        "binding_name_override": "#visible",
+        "binding_type": "global"
+      }
+    ]
+  },
+  "custom_store_button_content@common.empty_panel": {
+    "controls": [
+      {
+        "image_default_zeqa@common.empty_image": {
+          "layer": 50,"offset": [0, -1],
+          "size": ["400%y", "100%"],
+          "keep_ratio": true,
+          "anchor_to": "center",
+          "anchor_from": "center",
+          "texture": "textures/ui/common/buttons/gold/mvstore"
+        }
+      }
+    ]
+  },
+
+  "store_button_panel": {
+    "type": "panel",
+    "size": ["100%", 32],
+    "ignored": "$is_secondary_client",
+    "controls": [
+      { "store_button@pause.custom_store_button": {} },
+      { "store_error_button@pause.store_error_button": {} },
+      {
+        "notif_bell": {
+          "type": "image",
+          "texture": "textures/ui/common/buttons/gold/notif_bell",
+          "size": [18, 18],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "offset": [4, -4],
+          "layer": 20,
+          "bindings": [
+            { "binding_type": "global", "binding_name": "#store_button_text" },
+            { "binding_type": "view", "source_property_name": "(#store_button_text = 'NStore')", "target_property_name": "#visible" }
+          ]
+        }
+      }
+    ]
+  },
+
+  "pause_screen_content": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "discord_button@pause.discord_button": {}
+        }
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "modal_input@pause.modal_input": {}
+        }
+      }
+    ]
+  },
+
+  "menu_background/button_panel": {
+    "modifications": [
+      {
+        "control_name": "quit_button",
+        "operation": "replace",
+        "value": {
+          "mv_quit_button@pause.mv_quit_button": {}
+        }
+      }
+    ]
+  },
+
+  "mv_quit_button@common_buttons.light_text_button": {
+    "size": ["100%", 28],
+    "$button_text": "pauseScreen.quit",
+    "$pressed_button_name": "button.menu_quit",
+    "anchor_to": "top_middle",
+    "anchor_from": "top_middle",
+    "$focus_override_down": "icon_panel_main_focus",
+    "variables": [
+      {
+        "requires": "($is_secondary_client and not $is_editor_playtest_roundtrip)",
+        "$button_text": "pauseScreen.secondaryClientLeave"
+      },
+      {
+        "requires": "$is_editor_playtest_roundtrip",
+        "$button_text": "pauseScreen.editor.quit"
+      }
+    ]
+  },
+
+  "modal_input@common.input_panel": {
+    "ignored": true,
+    "layer": 2000,
+    "controls": [
+      {
+        "modal_dialog_with_buttons": {
+          "type": "panel",
+          "size": [280, "100%"],
+          "controls": [
+            {
+              "sp": {
+                "type": "stack_panel",
+                "controls": [
+                  {
+                    "title": {
+                      "type": "panel",
+                      "size": ["100%", "100%c"],
+                      "controls": [
+                        {
+                          "img": {
+                            "type": "image",
+                            "texture": "textures/ui/popup/black",
+                            "size": ["100%", "100%c"],
+                            "controls": [
+                              {
+                                "img": {
+                                  "type": "image",
+                                  "texture": "textures/ui/popup/pop_up_title",
+                                  "size": ["100% - 2px", "300%c"],
+                                  "offset": [0, 1],
+                                  "controls": [
+                                    {
+                                      "modal_title_text": {
+                                        "type": "label",
+                                        "layer": 2,
+                                        "text": "Are you sure?",
+                                        "size": ["100%", 10],
+                                        "text_alignment": "center",
+                                        "shadow": false
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "desc": {
+                      "type": "panel",
+                      "size": ["100%", "100%c"],
+                      "controls": [
+                        {
+                          "img": {
+                            "type": "image",
+                            "layer": -1,
+                            "texture": "textures/ui/popup/black",
+                            "size": ["100%", "100%c"],
+                            "controls": [
+                              {
+                                "img": {
+                                  "type": "image",
+                                  "size": ["100% - 2px", "100%cm - 2px"],
+                                  "texture": "textures/ui/popup/white",
+                                  "color": [
+                                    0.192156862745098, 0.196078431372549, 0.2
+                                  ],
+                                  "controls": [
+                                    {
+                                      "sp": {
+                                        "type": "stack_panel",
+                                        "controls": [
+                                          {
+                                            "yp1": {
+                                              "type": "panel",
+                                              "size": ["100%", 10]
+                                            }
+                                          },
+                                          {
+                                            "wrapper": {
+                                              "type": "panel",
+                                              "size": ["100%", "100%c"],
+                                              "controls": [
+                                                {
+                                                  "l@pause.modal_scrolling_panel_clip_label": {
+                                                    "alpha": 1,
+                                                    "$text": "Also make sure to join our discord at discord.gg/inpvp"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "yp2": {
+                                              "type": "panel",
+                                              "size": ["100%", 10]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "buttons": {
+                      "type": "panel",
+                      "size": ["100%", "100%c"],
+                      "controls": [
+                        {
+                          "img": {
+                            "type": "image",
+                            "layer": -1,
+                            "texture": "textures/ui/popup/black",
+                            "size": ["100%", "100%c"],
+                            "controls": [
+                              {
+                                "img": {
+                                  "type": "image",
+                                  "anchor_from": "bottom_middle",
+                                  "anchor_to": "bottom_middle",
+                                  "texture": "textures/ui/popup/pop_up_title_bottom",
+                                  "size": ["100% - 2px", "100%c + 4px"],
+                                  "offset": [0, -1],
+                                  "controls": [
+                                    {
+                                      "p": {
+                                        "type": "panel",
+                                        "size": ["100% - 4px", "100%c"],
+                                        "controls": [
+                                          {
+                                            "two_buttons_panel": {
+                                              "type": "panel",
+                                              "anchor_to": "bottom_middle",
+                                              "anchor_from": "bottom_middle",
+                                              "size": ["100%", 64],
+                                              "$default_state|default": false,
+                                              "$hover_state|default": false,
+                                              "$pressed_state|default": false,
+                                              "$locked_state|default": false,
+                                              "controls": [
+                                                {
+                                                  "modal_left_button@common-mineville.pressed": {
+                                                    "$button_panel": "pause.pressed_panel",
+                                                    "anchor_to": "top_middle",
+                                                    "anchor_from": "top_middle",
+                                                    "size": ["100%", "50%"],
+                                                    "$button_text": "Save and Quit",
+                                                    "$pressed_button_name": "button.menu_quit"
+                                                  }
+                                                },
+                                                {
+                                                  "modal_rightcancel_button@common-mineville.tab": {
+                                                    "$toggle_name": "mv_confirmation_toggle_name",
+                                                    "$radio_toggle_group": true,
+                                                    "$toggle_group_forced_index": 0,
+                                                    "$button_text": "Cancel",
+                                                    "$tab_view_binding_name": "mv_quit_confirmation_cancel",
+                                                    "$button_panel": "pause.pressed_panel",
+                                                    "$green_textures": true,
+                                                    "anchor_to": "bottom_middle",
+                                                    "anchor_from": "bottom_middle",
+                                                    "size": ["100%", "50%"]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "bg@common.screen_background": {
+          "size": ["200%", "200%"],
+          "alpha": 0.5,
+          "layer": -50
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_control_name": "mv_quit_confirmation",
+        "source_property_name": "#toggle_state",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+
+  "modal_scrolling_panel_clip_label": {
+    "type": "label",
+    "max_size": ["100% - 50px", 120],
+    "size": ["100% - 50px", "default"],
+    "text_alignment": "center",
+    "text": "$text",
+    "shadow": false,
+    "alpha": 0,
+    "bindings": "$bindings",
+    "$bindings|default": []
+  },
+
+  "pressed_panel": {
+    "type": "panel",
+    "$outer_size": ["100% - 2px", "100% - 2px"],
+    "alpha": "$button_alpha",
+    "propagate_alpha": true,
+    "controls": [
+      {
+        "outer_panel": {
+          "type": "panel",
+          "size": "$outer_size",
+          "anchor_from": "$outer_anchor",
+          "anchor_to": "$outer_anchor",
+          "controls": [
+            {
+              "texture": {
+                "type": "image",
+                "layer": 1,
+                "texture": "$texture",
+                "alpha": "$texture_alpha",
+                "size": "$texture_size",
+                "anchor_from": "bottom_middle",
+                "anchor_to": "bottom_middle",
+                "controls": [
+                  {
+                    "text": {
+                      "type": "label",
+                      "layer": 3,
+                      "text": "$button_text",
+                      "font_scale_factor": "$button_text_font_scale_factor",
+                      "$button_text_font_scale_factor|default": 1.0,
+                      "font_type": "$button_text_font_type",
+                      "$button_text_font_type|default": "default",
+                      "shadow": "$button_text_shadow",
+                      "color": "$button_text_color",
+                      "offset": "$button_text_offset_holder",
+                      "bindings": "$button_text_bindings",
+                      "$button_text_bindings|default": [],
+                      "anchor_from": "$button_text_anchor",
+                      "anchor_to": "$button_text_anchor"
+                    }
+                  },
+                  {
+                    "panel_content_holder": {
+                      "type": "panel",
+                      "layer": 4,
+                      "size": ["100%", "100%"],
+                      "controls": [
+                        {
+                          "panel_content@$panel_content": {}
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "gamepad_outline": {
+                      "type": "image",
+                      "allow_clipping": false,
+                      "ignored": "(not ((($hover_state and $pressed_state) or $hover_state) and $gamepad_outline))",
+                      "layer": 9,
+                      "texture": "textures/ui/popup/outline",
+                      "size": ["100% + 2px", "100% + 2px"],
+                      "bindings": [
+                        {
+                          "binding_type": "global",
+                          "binding_name": "#is_using_gamepad",
+                          "binding_name_override": "#visible"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "hover_text@common.hover_text": {
+                "ignored": "(not $hover_state)",
+                "allow_clipping": false,
+                "layer": 10,
+                "property_bag": {
+                  "#hover_text_control": "$button_hover_text"
+                },
+                "bindings": "$hover_text_bindings",
+                "$hover_text_bindings|default": [
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "#hover_text_control",
+                    "target_property_name": "#hover_text"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "friendsdrawer_button_panel": {
+    "offset": [-5, 35]
+  },
+
+  "discord_button@iconbutton.button": {
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "offset": [5, 5],
+    "size": [130, "100%c"],
+    "$default_button_texture": "textures/ui/common/buttons/blurple/default",
+    "$hover_button_texture": "textures/ui/common/buttons/blurple/hover",
+    "$pressed_button_texture": "textures/ui/common/buttons/blurple/pressed",
+    "$button_pressed_offset": [3, 1],
+    "$discord_button": true,
+    "$button_content": "pause.discord_button_content",
+    "$icon_texture": "textures/ui/discord",
+    "$button_text": "Join our Discord!\nDiscord.gg/inpvp",
+    "$default_text_color": "white",
+    "$pressed_button_name": "button.null"
+  },
+
+  "discord_button_content@iconbutton.iconbutton_button_content": {
+    "controls": [
+      {
+        "icon_wrapper": {
+          "type": "panel",
+          "size": ["100%c", "100%c"],
+          "controls": [
+            {
+              "icon_with_border": {
+                "type": "panel",
+                "size": [18, 18],
+                "offset": [-3, -2],
+                "controls": [
+                  {
+                    "iconbutton_animated_icon@iconbutton.iconbutton_animated_icon": {}
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "padding_middle@common.empty_panel": {
+          "size": [2, "100%"]
+        }
+      },
+      {
+        "vertically_centered_text": {
+          "type": "panel",
+          "size": ["100%c", "100%c"],
+          "controls": [
+            {
+              "profile_button_label@common_buttons.new_ui_binding_button_label": {
+                "layer": 1,
+                "$new_ui_label_offset": [0, -3],
+                "$button_text_binding_type": "none",
+                "$button_text_size": ["default", "default"],
+                "$button_text_max_size": ["default", 20],
+                "bindings": []
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

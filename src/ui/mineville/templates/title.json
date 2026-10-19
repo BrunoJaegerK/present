@@ -1,0 +1,53 @@
+{
+    "namespace": "mv_template_title",
+
+    "title_panel": {
+        "type": "panel",
+        "$title_id|default": "",
+        "$update_string": "('%'+$title_id+'%')",
+        "$controls|default": [],
+        "controls": [
+            {
+                "data_control": {
+                    "type": "panel",
+                    "size": [0, 0],
+                    "bindings": [
+                        {
+                            "binding_name": "#hud_title_text_string"
+                        },
+                        {
+                            "binding_name": "#hud_title_text_string",
+                            "binding_name_override": "#preserved_text",
+                            "binding_condition": "visibility_changed"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "(not (#hud_title_text_string = #preserved_text) and not ((#hud_title_text_string - $update_string) = #hud_title_text_string))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "$title_id": {
+                    "type": "panel",
+                    "controls": "$controls",
+                    "bindings": [
+                        {
+                            "binding_type": "view",
+                            "source_control_name": "data_control",
+                            "resolve_sibling_scope": true,
+                            "source_property_name": "#preserved_text",
+                            "target_property_name": "#preserved_text"
+                        },
+                        {
+                            "binding_type": "view",
+                            "source_property_name": "((not((#preserved_text - $update_string) = '%')) and (not(#preserved_text = '')))",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

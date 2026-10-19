@@ -1,0 +1,148 @@
+{
+  "namespace": "mv_title_objective",
+
+  "root_panel@mv_template_title.title_panel": {
+    "$title_id": "obj",
+    "$controls": [
+      {
+        "stack_panel": {
+          "type": "stack_panel",
+          "orientation": "vertical",
+          "size": ["100%", "100%"],
+          "controls": [
+            {
+              "boss_offset": {
+                "type": "panel",
+                "size": ["100%", 20],
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "$title_id",
+                    "source_property_name": "#preserved_text",
+                    "target_property_name": "#preserved_text"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(((#preserved_text - $update_string) > '§0') and (#preserved_text - $update_string) < '§1'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+                "touch_padding": {
+                    "ignored": "(not $touch)",
+                    "type": "panel",
+                    "size": ["100%", 16]
+                }
+            },
+            {
+              "objective_wrapper": {
+                "type": "panel",
+                "size": ["100%", "fill"],
+                "controls": [
+                  {
+                    "objective_panel": {
+                      "type": "panel",
+                      "anchor_from": "top_middle",
+                      "anchor_to": "top_middle",
+                      "size": ["100%cm", "100%cm"],
+                      "offset": [0, "20px"],
+                      "controls": [
+                        {
+                          "background_image": {
+                            "type": "image",
+                            "size": ["100%sm + 6px", "100%sm + 6px"],
+                            "texture": "textures/mineville/ui/assets/tooltip_bg",
+                            "alpha": 0.7
+                          }
+                        },
+                        {
+                          "stack_panel": {
+                            "type": "stack_panel",
+                            "size": ["100%c", "100%cm"],
+                            "orientation": "horizontal",
+                            "controls": [
+                              {
+                                "image_panel@mv_template_title.title_panel": {
+                                  "ignored": true,
+                                  "type": "panel",
+                                  "$title_id": "objimg",
+                                  "size": ["100%y", "100%sm"],
+                                  "max_size": [22, "100%sm"],
+                                  "controls": [
+                                    {
+                                      "sizing_panel": {
+                                        "type": "panel",
+                                        "anchor_from": "top_left",
+                                        "anchor_to": "top_left",
+                                        "size": ["100% - 2px", "100%x"],
+                                        "max_size": [20, 20],
+                                        "controls": [
+                                          {
+                                            "image": {
+                                              "type": "image",
+                                              "size": ["100%-4px", "100%-4px"],
+                                              "layer": 3,
+                                              "texture": "textures/items/apple"
+                                            }
+                                          },
+                                          {
+                                            "background_image": {
+                                              "type": "image",
+                                              "layer": 2,
+                                              "texture": "textures/mineville/ui/assets/tooltip_bg",
+                                              "alpha": 0.5
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "text_panel": {
+                                  "type": "panel",
+                                  "size": ["100%c + 2px", "100%c"],
+                                  "controls": [
+                                    {
+                                      "text_label": {
+                                        "type": "label",
+                                        "text_alignment": "left",
+                                        "shadow": true,
+                                        "text": "#mv_text",
+                                        "font_scale_factor": 0.5,
+                                        "bindings": [
+                                          {
+                                            "binding_type": "view",
+                                            "source_control_name": "$title_id",
+                                            "source_property_name": "#preserved_text",
+                                            "target_property_name": "#preserved_text"
+                                          },
+                                          {
+                                            "binding_type": "view",
+                                            "source_property_name": "(#preserved_text - $update_string)",
+                                            "target_property_name": "#mv_text"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+    "namespace": "mv_title_note",
+
+    "root_panel@mv_template_title.title_panel": {
+        "$title_id": "note",
+        "$controls": [
+            {
+                "objective_panel": {
+                    "type": "panel",
+                    "anchor_from": "bottom_right",
+                    "anchor_to": "bottom_right",
+                    "size": ["50% - 104px", "100% - 12px"],
+                    "offset": [-8, -6],
+                    "controls": [
+                        {
+                            "text_label": {
+                                "type": "label",
+                                "layer": 2,
+                                "anchor_from": "bottom_right",
+                                "anchor_to": "bottom_right",
+                                "shadow": true,
+                                "text": "#mv_text",
+                                "max_size": ["100% - 6px", "100% - 4px"],
+                                "bindings": [
+                                    {
+                                        "binding_type": "view",
+                                        "source_control_name": "$title_id",
+                                        "source_property_name": "#preserved_text",
+                                        "target_property_name": "#preserved_text"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "(#preserved_text - $update_string)",
+                                        "target_property_name": "#mv_text"
+                                    }
+                                ],
+                                "controls": [
+                                    {
+                                        "note_area": {
+                                            "type": "image",
+                                            "layer": -1,
+                                            "size": ["100% + 6px", "100% + 4px"],
+                                            "texture": "textures/mineville/ui/assets/tooltip_bg",
+                                            "alpha": 0.7
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

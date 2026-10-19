@@ -1,0 +1,26 @@
+{
+  "game.player.attack.nodamage": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "sounds/zeqa/shhh"
+      }
+    ]
+  },
+  "game.player.attack.strong": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "sounds/zeqa/shhh"
+      }
+    ]
+  },
+  "game.player.attack.critical": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "sounds/zeqa/shhh"
+      }
+    ]
+  }
+}

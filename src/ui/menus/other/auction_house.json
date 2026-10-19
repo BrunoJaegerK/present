@@ -1,0 +1,981 @@
+{
+  "namespace": "auction-house",
+  "main@common-mineville.form_template": {
+    "$title_bindings": [ { "binding_name": "#title_text" },
+      {
+        "binding_type": "view",
+        "source_property_name": "(#title_text - '@mineville/auction_house:')",
+        "target_property_name": "#text"
+      }
+    ],
+    "$content_controls": [
+      {
+        "content_panel": {
+          "type": "panel",
+          "controls": [
+            {
+              "scroll_panel@common.scrolling_panel": {
+                "$show_background": false,
+                "$scrolling_content": "auction-house.scroll_content",
+                "$scroll_box_touch_image_control": "common-mineville.scroll_box_touch_image_control",
+                "$scroll_box_mouse_image_control": "common-mineville.scroll_box_mouse_image_control",
+                "$scroll_size": ["5px", "100% - 12px"],
+                "$scroll_bar_left_padding_size": ["0px", "0px"],
+                "$scroll_bar_right_padding_size": ["4px", "0px"]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "scroll_content": {
+    "type": "panel",
+    "size": ["100%", "200px"],
+    "controls": [
+      {
+        "stack_panel": {
+          "type": "stack_panel",
+          "size": ["100% - 10px", "100% - 10px"],
+          "controls": [
+            {
+              "body_panel": {
+                "type": "panel",
+                "size": ["100%", "100%c"],
+                "bindings": [ { "binding_type": "view", "source_control_name": "menu_slot", "source_property_name": "#form_text", "target_property_name": "#form_text" },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not (#form_text = ''))",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "controls": [
+                  {
+                    "wrapper": {
+                      "type": "panel",
+                      "size": ["100% - 5px", "100%cm"],
+                      "controls": [
+                        {
+                          "sph": {
+                            "type": "stack_panel",
+                            "orientation": "horizontal",
+                            "size": ["100%", "100%cm"],
+                            "controls": [
+                              {
+                                "body_text_panel": {
+                                  "type": "panel",
+                                  "size": ["100%cm", "100%cm"],
+                                  "controls": [
+                                    {
+                                      "background": {
+                                        "type": "image",
+                                        "texture": "textures/ui/common/light_field",
+                                        "size": [
+                                          "100%sm + 10px",
+                                          "100%sm + 10px"
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "label": { "bindings": [ { "binding_type": "view", "source_control_name": "menu_slot", "source_property_name": "#form_text", "target_property_name": "#form_text" } ],
+                                        "type": "label",
+                                        "text": "#form_text",
+                                        "shadow": true,
+                                        "layer": 1
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "search_padding": {
+                                  "type": "panel",
+                                  "size": [3, 0],
+                                  "bindings": [
+                                    {
+                                      "binding_type": "view",
+                                      "source_control_name": "search_button_bind",
+                                      "source_property_name": "#visible",
+                                      "target_property_name": "#visible"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "search_button_panel": {
+                                  "type": "panel",
+                                  "size": ["100%y", "100%sm"],
+                                  "controls": [
+                                    {
+                                      "search_button_bind@auction-house.search_button_template": {
+                                        "$collection_index": 32
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "warning_padding": {
+                                  "type": "panel",
+                                  "size": [3, 0],
+                                  "bindings": [
+                                    {
+                                      "binding_type": "view",
+                                      "source_control_name": "search_button_bind",
+                                      "source_property_name": "#visible",
+                                      "target_property_name": "#visible"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "warning_button_panel": {
+                                  "type": "panel",
+                                  "size": ["100%y", "100%sm"],
+                                  "controls": [
+                                    {
+                                      "warning_button_bind@auction-house.warning_button_template": {
+                                        "$collection_index": 35
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "fill_padding": {
+                                  "type": "panel",
+                                  "size": ["fill", 0]
+                                }
+                              },
+                              {
+                                "radio_buttons_panel": {
+                                  "type": "stack_panel",
+                                  "orientation": "horizontal",
+                                  "size": ["100%c", "100%sm"],
+                                  "controls": [
+                                    {
+                                      "auctions_button_bind@auction-house.radio_button_template": {
+                                        "$cp_offset": [1, 0],
+                                        "size": [60, "100%"],
+                                        "$collection_index": 33
+                                      }
+                                    },
+                                    {
+                                      "orders_button_bind@auction-house.radio_button_template": {
+                                        "size": [60, "100%"],
+                                        "$collection_index": 34
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "first_padding": {
+                "type": "panel",
+                "size": ["0px", "3px"]
+              }
+            },
+            {
+              "buttons": {
+                "type": "grid",
+                "collection_name": "form_buttons",
+                "grid_item_template": "auction-house.auction_button",
+                "grid_dimensions": [9, 3],
+                "size": ["100%", "fill"]
+              }
+            },
+            {
+              "second_padding": {
+                "type": "panel",
+                "size": ["0px", "3px"]
+              }
+            },
+            {
+              "page_buttons": {
+                "$button_color": "white",
+                "type": "stack_panel",
+                "orientation": "horizontal",
+                "collection_name": "form_buttons",
+                "size": ["100%", "25px"],
+                "controls": [
+                  {
+                    "previous_page@auction-house.page_button": {
+                      "collection_index": 27
+                    }
+                  },
+                  {
+                    "filter@auction-house.page_button": {
+                      "collection_index": 28
+                    }
+                  },
+                  {
+                    "claim@auction-house.page_button": {
+                      "collection_index": 29
+                    }
+                  },
+                  {
+                    "listings@auction-house.page_button": {
+                      "collection_index": 30
+                    }
+                  },
+                  {
+                    "next_page@auction-house.page_button": {
+                      "collection_index": 31
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "auction_button": {
+    "type": "panel",
+    "size": ["11.1%", "33%"],
+    "controls": [
+      {
+        "button@common.button": {
+          "$pressed_button_name": "button.form_button_click",
+          "button_mappings": [
+            {
+              "from_button_id": "button.menu_ok",
+              "to_button_id": "$pressed_button_name",
+              "mapping_type": "focused"
+            }
+          ],
+          "default_control": "default",
+          "hover_control": "hover",
+          "size": ["100% - 5px", "100% - 2px"],
+          "bindings": [
+            {
+              "binding_type": "collection_details",
+              "binding_collection_name": "form_buttons"
+            },
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons",
+              "binding_name": "#form_button_text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not (#form_button_text = ''))",
+              "target_property_name": "#visible"
+            }
+          ],
+          "controls": [
+            {
+              "default": {
+                "type": "panel",
+                "controls": [
+                  {
+                    "background": {
+                      "type": "image",
+                      "texture": "textures/ui/common/buttons/common/default",
+                      "bindings": [
+                        {
+                          "binding_type": "collection",
+                          "binding_collection_name": "form_buttons",
+                          "binding_name": "#form_button_text"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(not (#form_button_text = ''))",
+                          "target_property_name": "#visible"
+                        }
+                      ],
+                      "controls": [
+                        {
+                          "contents@auction-house.auction_button_content": {}
+                        }
+                      ]
+                    }
+                  },
+                  { "bg_leg": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_legendary", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'LEGENDARY;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_rar": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_rare", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'RARE;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_unc": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_uncommon", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'UNCOMMON;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_com": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_common", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "((not ((#t - 'COMMON;') = #t)) and ((#t - 'UNCOMMON;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_fre": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_free", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'FREE;') = #t))", "target_property_name": "#visible" }
+                  ] } }
+                ]
+              }
+            },
+            {
+              "hover": {
+                "type": "panel",
+                "controls": [
+                  {
+                    "background": {
+                      "type": "image",
+                      "texture": "textures/ui/common/buttons/common/default",
+                      "bindings": [
+                        {
+                          "binding_type": "collection",
+                          "binding_collection_name": "form_buttons",
+                          "binding_name": "#form_button_text"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(not (#form_button_text = ''))",
+                          "target_property_name": "#visible"
+                        }
+                      ],
+                      "controls": [
+                        {
+                          "contents@auction-house.auction_button_content": {}
+                        },
+                        {
+                          "hover_text_panel@common.hover_text": {
+                            "layer": 20,
+                            "bindings": [
+                              {
+                                "binding_type": "collection",
+                                "binding_collection_name": "form_buttons",
+                                "binding_name": "#form_button_text"
+                              },
+                              {
+                                "binding_type": "view",
+                                "source_property_name": "((#form_button_text - ('%.10s' * (#form_button_text  - 'BID' - 'BUY' - 'CANCEL' - 'CLAIM' - 'SOLD OUT' - 'SELECT' - 'SELL' - 'APPLY' - 'ACCEPT' - 'DENY' - 'VIEW' - '!'))) - 'BID' - 'BUY' - 'CANCEL' - 'CLAIM' - 'SOLD OUT' - 'SELECT' - 'SELL' - 'APPLY' - 'ACCEPT' - 'DENY' - 'VIEW' - 'LEGENDARY;' - 'RARE;' - 'UNCOMMON;' - 'COMMON;' - 'FREE;' - '' - '!')",
+                                "target_property_name": "#hover_text"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  { "bg_leg": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_legendary", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'LEGENDARY;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_rar": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_rare", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'RARE;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_unc": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_uncommon", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'UNCOMMON;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_com": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_common", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "((not ((#t - 'COMMON;') = #t)) and ((#t - 'UNCOMMON;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "bg_fre": { "type": "image", "texture": "textures/ui/common/boxes/box_bg_free", "size": ["100%", "100%"], "bindings": [
+                    { "binding_type": "collection", "binding_collection_name": "form_buttons", "binding_name": "#form_button_text", "binding_name_override": "#t" },
+                    { "binding_type": "view", "source_property_name": "(not ((#t - 'FREE;') = #t))", "target_property_name": "#visible" }
+                  ] } },
+                  { "hb_top": { "type": "image", "texture": "textures/ui/White", "color": [1, 1, 1], "layer": 10, "size": ["100% - 2px", 2], "anchor_from": "top_left", "anchor_to": "top_left" } },
+                  { "hb_bot": { "type": "image", "texture": "textures/ui/White", "color": [1, 1, 1], "layer": 10, "size": ["100% - 1px", 2], "anchor_from": "bottom_left", "anchor_to": "bottom_left" } },
+                  { "hb_lft": { "type": "image", "texture": "textures/ui/White", "color": [1, 1, 1], "layer": 10, "size": [2, "100% - 1px"], "anchor_from": "top_left", "anchor_to": "top_left" } },
+                  { "hb_rgt": { "type": "image", "texture": "textures/ui/White", "color": [1, 1, 1], "layer": 10, "size": [2, "100%"], "anchor_from": "top_right", "anchor_to": "top_right" } }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "actions_overlay": {
+          "type": "panel",
+          "size": ["100% - 9px", "10px"],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": ["0px", "-5px"],
+          "layer": 5,
+          "controls": [
+            { "bid_button@auction-house.action_button": { "$button_color": "orange", "$key": "Bid", "$key_match": "BID" } },
+            { "buy_button@auction-house.action_button": { "$button_color": "green", "$key": "Buy", "$key_match": "BUY" } },
+            { "cancel_button@auction-house.action_button": { "$button_color": "red", "$key": "Cancel", "$key_match": "CANCEL" } },
+            { "claim_button@auction-house.action_button": { "$button_color": "pink", "$key": "Claim", "$key_match": "CLAIM" } },
+            { "sold_button@auction-house.action_button": { "$button_color": "common", "$key": "Sold Out", "$key_match": "SOLD OUT" } },
+            { "select_button@auction-house.action_button": { "$button_color": "green", "$key": "Select", "$key_match": "SELECT" } },
+            { "sell_button@auction-house.action_button": { "$button_color": "green", "$key": "Sell", "$key_match": "SELL" } },
+            { "apply_button@auction-house.action_button": { "$button_color": "green", "$key": "Apply", "$key_match": "APPLY" } },
+            { "accept_button@auction-house.action_button": { "$button_color": "green", "$key": "Accept", "$key_match": "ACCEPT" } },
+            { "deny_button@auction-house.action_button": { "$button_color": "red", "$key": "Deny", "$key_match": "DENY" } },
+            { "view_button@auction-house.action_button": { "$button_color": "orange", "$key": "View", "$key_match": "VIEW" } }
+          ]
+        }
+      }
+    ]
+  },
+  "auction_button_content": {
+    "type": "panel",
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "layer": 1,
+    "size": ["100% - 4px", "100% - 6px"],
+    "offset": ["0px", "2px"],
+    "controls": [
+      {
+        "stack_panel": {
+          "type": "stack_panel",
+          "orientation": "vertical",
+          "size": ["100%", "100%"],
+          "controls": [
+            {
+              "price_label": {
+                "type": "panel",
+                "size": ["100%", "10px"],
+                "controls": [
+                  {
+                    "background": {
+                      "type": "image",
+                      "texture": "textures/ui/common/light_field",
+                      "layer": 1
+                    }
+                  },
+                  {
+                    "label": {
+                      "type": "label",
+                      "text": "#text",
+                      "font_size": "small",
+                      "layer": 2,
+                      "max_size": ["100% - 2px", "100%"],
+                      "bindings": [
+                        {
+                          "binding_type": "collection",
+                          "binding_collection_name": "form_buttons",
+                          "binding_name": "#form_button_text"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(('%.10s' * (#form_button_text  - 'BID' - 'BUY' - 'CANCEL' - 'CLAIM' - 'SOLD OUT' - 'SELECT' - 'SELL' - 'APPLY' - 'ACCEPT' - 'DENY' - 'VIEW' - 'LEGENDARY;' - 'RARE;' - 'UNCOMMON;' - 'COMMON;' - 'FREE;')) - '&')",
+                          "target_property_name": "#text"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "bindings": [
+                  {
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons",
+                    "binding_name": "#form_button_text"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not(('%.1s' * #form_button_text) = '!'))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "item_image": {
+                "type": "panel",
+                "size": ["100%", "fill"],
+                "controls": [
+                  {
+                    "panel": {
+                      "type": "panel",
+                      "bindings": [
+                        {
+                          "binding_type": "collection",
+                          "binding_collection_name": "form_buttons",
+                          "binding_name": "#form_button_texture"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(not (#form_button_texture = ''))",
+                          "target_property_name": "#visible"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(not (#form_button_texture = 'loading'))",
+                          "target_property_name": "#visible"
+                        }
+                      ],
+                      "controls": [
+                        {
+                          "image": {
+                            "type": "image",
+                            "bindings": [
+                              {
+                                "binding_type": "collection",
+                                "binding_collection_name": "form_buttons",
+                                "binding_name": "#form_button_texture",
+                                "binding_name_override": "#texture"
+                              },
+                              {
+                                "binding_type": "collection",
+                                "binding_collection_name": "form_buttons",
+                                "binding_name": "#form_button_texture_file_system",
+                                "binding_name_override": "#texture_file_system"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "action_spacer": {
+                "type": "panel",
+                "size": ["100%", "10px"]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "action_button@common-mineville.form_button": {
+    "enabled": false,
+    "visible": false,
+    "$button_color|default": "common",
+    "$key|default": "none",
+    "$key_match|default": "$key",
+    "$hover_text_bindings": [
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons",
+        "binding_name": "#form_button_text"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#form_button_text - ('%.10s' * (#form_button_text  - 'BID' - '!' - 'BUY' - 'CANCEL' - 'CLAIM' - 'SOLD OUT' - 'SELECT' - 'SELL' - 'APPLY' - 'ACCEPT' - 'DENY' - 'VIEW'))) - 'BID' - '!' - 'BUY' - 'CANCEL' - 'CLAIM' - 'SOLD OUT' - 'SELECT' - 'SELL' - 'APPLY' - 'ACCEPT' - 'DENY' - 'VIEW' - 'LEGENDARY;' - 'RARE;' - 'UNCOMMON;' - 'COMMON;' - 'FREE;')",
+        "target_property_name": "#hover_text"
+      }
+    ],
+    "size": ["100%", "10px"],
+    "bindings": [
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons",
+        "binding_name": "#form_button_text"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#form_button_text - $key_match) = #form_button_text))",
+        "target_property_name": "#enabled"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not ((#form_button_text - $key_match) = #form_button_text))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "$button_contents": [
+      {
+        "label": {
+          "type": "label",
+          "text": "$key",
+          "font_size": "small",
+          "layer": 1,
+          "offset": ["0px", "-1px"]
+        }
+      }
+    ]
+  },
+  "page_button": {
+    "type": "panel",
+    "size": ["fill", "100%"],
+    "$control_name|default": "button",
+    "bindings": [
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons",
+        "binding_name": "#form_button_text"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#form_button_text = ''))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      {
+        "$control_name@common-mineville.form_button": {
+          "bindings": "$extra_bindings",
+          "$extra_bindings|default": [],
+          "$button_color": "white",
+          "size": ["100% - 5px", "100%"],
+          "$button_contents": [
+            {
+              "label": {
+                "type": "label",
+                "text": "#text",
+                "layer": 1,
+                "offset": ["0px", "-1px"],
+                "max_size": ["100% - 4px", "100% - 4px"],
+                "bindings": [
+                  {
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons",
+                    "binding_name": "#form_button_text",
+                    "binding_name_override": "#text"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "search_button_template": {
+    "type": "panel",
+    "controls": [
+      {
+        "collection_panel": {
+          "type": "collection_panel",
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "btn@common.button": {
+                "collection_index": "$collection_index",
+                "$pressed_button_name": "button.form_button_click",
+                "controls": [
+                  {
+                    "content": {
+                      "type": "panel",
+                      "controls": [
+                        {
+                          "texture": {
+                            "type": "image",
+                            "texture": "textures/ui/common/light_field",
+                            "controls": [
+                              {
+                                "icon": {
+                                  "type": "image",
+                                  "texture": "textures/ui/magnifyingGlass",
+                                  "size": [16, 16],
+                                  "offset": [1, 1]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "hover@common.hover_text": {
+                      "layer": 20,
+                      "bindings": [
+                        {
+                          "binding_type": "collection",
+                          "binding_collection_name": "form_buttons",
+                          "binding_name": "#form_button_text"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(#form_button_text - 'LEGENDARY;' - 'RARE;' - 'UNCOMMON;' - 'COMMON;' - 'FREE;')",
+                          "target_property_name": "#hover_text"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "bindings": [
+                  {
+                    "binding_type": "collection_details",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons",
+                    "binding_name": "#form_button_text"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not (#form_button_text = ''))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "radio_button_template": {
+    "type": "panel",
+    "controls": [
+      {
+        "collection_panel": {
+          "type": "collection_panel",
+          "collection_name": "form_buttons",
+          "$cp_offset|default": [0, 0],
+          "offset": "$cp_offset",
+          "controls": [
+            {
+              "btn@common.button": {
+                "collection_index": "$collection_index",
+                "$pressed_button_name": "button.form_button_click",
+                "controls": [
+                  {
+                    "default@auction-house.radio_button_control_template": {
+                      "$hover_state": false,
+                      "$state": "default"
+                    }
+                  },
+                  {
+                    "hover@auction-house.radio_button_control_template": {
+                      "$hover_state": true,
+                      "$state": "hover"
+                    }
+                  },
+                  {
+                    "pressed@auction-house.radio_button_control_template": {
+                      "$hover_state": false,
+                      "$state": "pressed"
+                    }
+                  }
+                ],
+                "bindings": [
+                  {
+                    "binding_type": "collection_details",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_name": "#form_button_text",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons",
+                    "binding_name_override": "#text"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((#text - 'selected;') = #text)",
+                    "target_property_name": "#enabled"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not (#text = ''))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "warning_button_template": {
+    "type": "panel",
+    "controls": [
+      {
+        "collection_panel": {
+          "type": "collection_panel",
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "btn@common.button": {
+                "collection_index": "$collection_index",
+                "$pressed_button_name": "button.none",
+                "controls": [
+                  {
+                    "content": {
+                      "type": "panel",
+                      "controls": [
+                        {
+                          "texture": {
+                            "type": "image",
+                            "texture": "textures/ui/common/dark_field",
+                            "controls": [
+                              {
+                                "icon": {
+                                  "type": "image",
+                                  "texture": "textures/ui/common/warning",
+                                  "size": [12, 12],
+                                  "offset": [0, 0]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "hover@common.hover_text": {
+                      "layer": 20,
+                      "bindings": [
+                        {
+                          "binding_type": "collection",
+                          "binding_collection_name": "form_buttons",
+                          "binding_name": "#form_button_text"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "(#form_button_text - 'LEGENDARY;' - 'RARE;' - 'UNCOMMON;' - 'COMMON;' - 'FREE;')",
+                          "target_property_name": "#hover_text"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "bindings": [
+                  {
+                    "binding_type": "collection_details",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons",
+                    "binding_name": "#form_button_text"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not (#form_button_text = ''))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "radio_button_control_template": {
+    "type": "panel",
+    "controls": [
+      {
+        "texture": {
+          "type": "image",
+          "size": ["100%sm", "100%sm"],
+          "anchor_to": "bottom_middle",
+          "anchor_from": "bottom_middle",
+          "texture": "#texture",
+          "property_bag": {
+            "#is_hover": "$hover_state",
+            "#type_0": "dark/unchecked",
+            "#type_1": "dark/checked",
+            "#type_2": "dark/unchecked_hover",
+            "#type_3": "dark/checked"
+          },
+          "bindings": [
+            {
+              "binding_name": "#form_button_text",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons",
+              "binding_name_override": "#text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((#text - 'selected;') = #text))",
+              "target_property_name": "#has_slected"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "('#type_' + ((1 * #has_slected) + (2 * #is_hover)))",
+              "target_property_name": "#ftype"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "('textures/mineville/ui/buttons/' + #ftype)",
+              "target_property_name": "#texture"
+            }
+          ],
+          "controls": [
+            {
+              "text": {
+                "type": "label",
+                "layer": 3,
+                "text": "#text",
+                "size": ["100% - 6px", "default"],
+                "max_size": ["100% - 6px", 20],
+                "text_alignment": "center",
+                "property_bag": {
+                  "#offset_0": [0, -1],
+                  "#offset_1": [0, 0]
+                },
+                "bindings": [
+                  {
+                    "binding_name": "#form_button_text",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((#form_button_text - 'selected;') = #form_button_text))",
+                    "target_property_name": "#has_slected"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "('#offset_' + (1 * #has_slected))",
+                    "target_property_name": "#offset"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(#form_button_text - 'selected;' - ';')",
+                    "target_property_name": "#text"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "texture_size_controller_0": {
+          "type": "panel",
+          "size": ["100%", "100%"],
+          "bindings": [
+            {
+              "binding_name": "#form_button_text",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons",
+              "binding_name_override": "#text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((#text - 'selected;') = #text)",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "texture_size_controller_1": {
+          "type": "panel",
+          "size": ["100%", "100% - 2px"],
+          "bindings": [
+            {
+              "binding_name": "#form_button_text",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons",
+              "binding_name_override": "#text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not ((#text - 'selected;') = #text))",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

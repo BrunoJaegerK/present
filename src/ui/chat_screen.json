@@ -1,0 +1,1015 @@
+{
+  "messages_text/text": {
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (('%.7s' * #text) = '%toast%'))",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (('%.7s' * #text) = '%toast%'))",
+        "target_property_name": "#enabled"
+      }
+    ]
+  },
+  "command@common.button": {
+    "$command|default": "/say Placeholder Command",
+    "$additional_text_only_label_not_included_as_command_or_chat|default": "",
+    "$pressed_button_name": "button.nodata",
+    "size": "$btnsize",
+    "$btnsize|default": ["100%", 26],
+    "$is_chat_not_command|default": false,
+    "$command_tooltip|default": "This is a command",
+    "$modifier|default": "#item_name_with_command",
+    "$default_button_texture": "textures/ui/chat/button/white_default",
+    "$hover_button_texture": "textures/ui/chat/button/white_hover",
+    "$pressed_button_texture": "textures/ui/chat/button/white_pressed",
+    "$s": false,
+    "$btntxtsize|default": ["100%-6px", "100%-4px"],
+    "controls": [
+      {
+        "default": {
+          "type": "image",
+          "texture": "$default_button_texture",
+          "size": ["100%", "100%-2px"],
+          "controls": [
+            {
+              "label": {
+                "type": "label",
+                "text": "$text",
+                "variables": [
+                  {
+                    "requires": "$is_chat_not_command",
+                    "$text": "($additional_text_only_label_not_included_as_command_or_chat+$command)"
+                  },
+                  {
+                    "requires": "(not $is_chat_not_command)",
+                    "$text": "$command"
+                  }
+                ],
+                "size": "$btntxtsize",
+                "anchor_to": "center",
+                "layer": 4,
+                "color": "black",
+                "shadow": "$s",
+                "offset": [0, 4],
+                "text_alignment": "center",
+                "anchor_from": "center"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "hover": {
+          "type": "image",
+          "texture": "$hover_button_texture",
+          "size": ["100%", "100%-2px"],
+          "controls": [
+            {
+              "label": {
+                "type": "label",
+                "text": "$text",
+                "variables": [
+                  {
+                    "requires": "$is_chat_not_command",
+                    "$text": "($additional_text_only_label_not_included_as_command_or_chat+$command)"
+                  },
+                  {
+                    "requires": "(not $is_chat_not_command)",
+                    "$text": "$command"
+                  }
+                ],
+                "size": "$btntxtsize",
+                "anchor_to": "center",
+                "layer": 4,
+                "color": "black",
+                "shadow": "$s",
+                "offset": [0, 4],
+                "text_alignment": "center",
+                "anchor_from": "center"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "pressed": {
+          "type": "image",
+          "texture": "$pressed_button_texture",
+          "size": ["100%", "100%-2px"],
+          "controls": [
+            {
+              "label": {
+                "type": "label",
+                "text": "$text",
+                "variables": [
+                  {
+                    "requires": "$is_chat_not_command",
+                    "$text": "($additional_text_only_label_not_included_as_command_or_chat+$command)"
+                  },
+                  {
+                    "requires": "(not $is_chat_not_command)",
+                    "$text": "$command"
+                  }
+                ],
+                "size": "$btntxtsize",
+                "anchor_to": "center",
+                "layer": 4,
+                "color": "black",
+                "shadow": "$s",
+                "offset": [0, 4],
+                "text_alignment": "center",
+                "anchor_from": "center"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "text_edit_box": {
+          "type": "edit_box",
+          "text_box_name": "#message_text_box",
+          "max_length": 2147483647,
+          "can_be_deselected": true,
+          "text_control": "text_control",
+          "focus_enabled": true,
+          "size": ["100%sm", "100%sm"],
+          "offset": [2, 0],
+          "layer": 3,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "$button_mappings|default": [
+            {
+              "from_button_id": "button.menu_select",
+              "to_button_id": "button.keyboard_toggle",
+              "handle_select": true,
+              "handle_deselect": false,
+              "mapping_type": "pressed",
+              "input_mode_condition": "not_gamepad"
+            },
+            {
+              "from_button_id": "button.menu_select",
+              "to_button_id": "button.text_edit_box_selected",
+              "handle_select": true,
+              "handle_deselect": false,
+              "mapping_type": "pressed",
+              "input_mode_condition": "not_gamepad"
+            },
+            {
+              "from_button_id": "button.menu_ok",
+              "to_button_id": "button.text_edit_box_selected",
+              "handle_select": true,
+              "handle_deselect": false,
+              "mapping_type": "focused",
+              "input_mode_condition": "gamepad_and_not_gaze"
+            },
+            {
+              "from_button_id": "button.menu_ok",
+              "to_button_id": "button.send",
+              "handle_select": false,
+              "handle_deselect": true,
+              "consume_event": false,
+              "mapping_type": "focused",
+              "scope": "global",
+              "input_mode_condition": "gamepad_and_not_gaze"
+            },
+            {
+              "from_button_id": "button.menu_cancel",
+              "to_button_id": "button.menu_select",
+              "handle_select": false,
+              "handle_deselect": true,
+              "mapping_type": "global"
+            }
+          ],
+          "button_mappings": "$button_mappings",
+          "variables": [
+            {
+              "requires": "$touch",
+              "$button_mappings": [
+                {
+                  "from_button_id": "button.menu_select",
+                  "to_button_id": "button.keyboard_toggle",
+                  "handle_select": true,
+                  "handle_deselect": false,
+                  "mapping_type": "pressed"
+                },
+                {
+                  "from_button_id": "button.menu_select",
+                  "to_button_id": "button.text_edit_box_selected",
+                  "handle_select": true,
+                  "handle_deselect": false,
+                  "mapping_type": "pressed"
+                },
+                {
+                  "from_button_id": "button.menu_ok",
+                  "to_button_id": "button.text_edit_box_selected",
+                  "handle_select": false,
+                  "handle_deselect": true,
+                  "mapping_type": "pressed"
+                },
+                {
+                  "from_button_id": "button.menu_cancel",
+                  "to_button_id": "button.menu_select",
+                  "handle_select": false,
+                  "handle_deselect": true,
+                  "mapping_type": "global"
+                }
+              ]
+            }
+          ],
+          "controls": [
+            {
+              "text_control": {
+                "type": "label",
+                "text": "#item_name",
+                "visible": false,
+                "property_bag": {
+                  "#property_field": "#item_name"
+                },
+                "localize": false,
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "display_text",
+                    "source_property_name": "#item_name",
+                    "target_property_name": "#text_content"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((#text_content+' ') + $command)",
+                    "ignored": "$is_chat_not_command",
+                    "target_property_name": "#item_name_with_command"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(#text_content + $command)",
+                    "ignored": "(not $is_chat_not_command)",
+                    "target_property_name": "#item_name_with_command"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "$modifier",
+                    "target_property_name": "#item_name"
+                  }
+                ]
+              }
+            },
+            {
+              "tooltip@common.button": {
+                "hover_control": "hover",
+                "controls": [
+                  {
+                    "hover@common.hover_text": {
+                      "property_bag": {
+                        "#hover_text": "$command_tooltip"
+                      }
+                    }
+                  }
+                ],
+                "consume_hover_events": false,
+                "button_mappings": [
+                  {
+                    "to_button_id": "button.null",
+                    "mapping_type": "global",
+                    "consume_event": false
+                  },
+                  {
+                    "to_button_id": "button.null",
+                    "mapping_type": "pressed",
+                    "consume_event": false
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "sendbutton@common_buttons.light_text_button": {
+          "layer": 0,
+          "propagate_alpha": true,
+          "always_listen_to_input": true,
+          "alpha": 0,
+          "size": ["100%sm", "100%sm"],
+          "offset": [2, 0],
+          "ignored": "$is_chat_not_command",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "$button_text": "exit",
+          "button_mappings": [
+            {
+              "from_button_id": "button.menu_select",
+              "to_button_id": "button.send",
+              "consume_event": false,
+              "mapping_type": "pressed",
+              "scope": "global",
+              "input_mode_condition": "not_gamepad"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "category": {
+    "type": "panel",
+    "size": ["100%", "100%c"],
+    "$content|default": [],
+    "controls": [
+      {
+        "label": {
+          "type": "image",
+          "texture": "textures/ui/chat/panel/title",
+          "size": ["100%", 20],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "controls": [
+            {
+              "label": {
+                "type": "label",
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "offset": [0, 0],
+                "text": "$category",
+                "shadow": true
+              }
+            },
+            {
+              "$category@common.toggle": {
+                "size": ["100%", 20],
+                "checked_control": "pressed",
+                "unchecked_control": "default",
+                "checked_hover_control": "hover_pressed",
+                "unchecked_locked_control": "locked",
+                "checked_locked_control": "locked",
+                "unchecked_hover_control": "hover_default",
+                "toggle_default_state": false,
+                "controls": [
+                  {
+                    "hover_pressed@common.empty_panel": {
+                      "debug": "white",
+                      "controls": [
+                        {
+                          "dd@chat.dropdownarrow": {
+                            "texture": "textures/ui/chat/icon/arrdown"
+                          }
+                        },
+                        {
+                          "hover@common.hover_text": {
+                            "layer": 999,
+                            "property_bag": {
+                              "#hover_text": "Click to Close"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "hover_default@common.empty_panel": {
+                      "debug": "white",
+                      "controls": [
+                        {
+                          "dd@chat.dropdownarrow": {
+                            "texture": "textures/ui/chat/icon/arrleft"
+                          }
+                        },
+                        {
+                          "hover@common.hover_text": {
+                            "layer": 999,
+                            "property_bag": {
+                              "#hover_text": "Click to Open"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "default@chat.dropdownarrow": {
+                      "texture": "textures/ui/chat/icon/arrleft"
+                    }
+                  },
+                  {
+                    "pressed@chat.dropdownarrow": {
+                      "texture": "textures/ui/chat/icon/arrdown"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "type": "stack_panel",
+          "size": ["100%", "100%c+3px"],
+          "offset": [0, 20],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "controls": "$content",
+          "bindings": [
+            {
+              "binding_type": "view",
+              "resolve_sibling_scope": true,
+              "source_control_name": "$category",
+              "source_property_name": "#toggle_state",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "image@common.empty_image": {
+    "texture": "$toggle_texture",
+    "size": "$size"
+  },
+  "dropdownarrow@common.empty_image": {
+    "offset": [-6, 0],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "size": [6, 6]
+  },
+  "core@common.empty_image": {
+    "texture": "textures/ui/chat/panel/panel_background",
+    "size": [154, "100%"],
+    "anchor_to": "top_right",
+    "anchor_from": "top_right",
+    "layer": 99,
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_control_name": "toggle_command_sidebar",
+        "source_property_name": "(#toggle_state)",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      {
+        "clhose@chat.toggle": {
+          "$toggle_view_binding_name": "toggle_command_sidebadr",
+          "$toggle_group_forced_index": 1,
+          "offset": [-3, 3],
+          "size": [18, 18],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "$sound_name": "random.chestclosed",
+          "$sound_pitch": 1,
+          "$sound_volume": 0.5,
+          "$toggle_texture": "textures/ui/chat/icon/close"
+        }
+      },
+      {
+        "title": {
+          "type": "label",
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [-3, 4.5],
+          "font_type": "MinecraftTen",
+          "text": "MegaSMP Commands",
+          "shadow": false
+        }
+      },
+      {
+        "scroll@common.scrolling_panel": {
+          "anchor_to": "top_middle",
+          "anchor_from": "top_middle",
+          "$show_background": false,
+          "size": [150, "100%-34px"],
+          "offset": [0, 26],
+          "$scroll_size": [5, "99%"],
+          "$scroll_box_mouse_image_control": "chat.mouse_scroll_bar",
+          "$scroll_box_visible_touch": true,
+          "$scrollbar_always_visible": true,
+          "$scrolling_pane_offset": [2, 4],
+          "$scroll_bar_right_padding_size": [1, 0],
+          "$scrolling_pane_size": [144, "100%"],
+          "$scroll_bar_contained": false,
+          "layer": 6,
+          "$scrolling_content": "chat.cmd_stack"
+        }
+      }
+    ]
+  },
+  "mouse_scroll_bar": {
+    "type": "image",
+    "texture": "textures/ui/chat/panel/ScrollHandle",
+    "size": [5, "100%"],
+    "layer": 4
+  },
+  "div@common.empty_panel": {
+    "size": ["100%", 8],
+    "controls": [
+      {
+        "yup@common.empty_panel": {
+          "size": ["100%-16px", 1],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "debug": "gray"
+        }
+      }
+    ]
+  },
+  "horizontal_stack": {
+    "type": "panel",
+    "controls": [
+      {
+        "stachHor": {
+          "type": "stack_panel",
+          "orientation": "horizontal",
+          "use_child_anchors": true,
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "size": ["100%c", 0],
+          "controls": "$controls"
+        }
+      }
+    ]
+  },
+  "cmd_stack": {
+    "type": "stack_panel",
+    "size": ["100%-2px", "100%c"],
+    "controls": [
+      {
+        "fccm_generated_commands": {
+          "type": "stack_panel",
+          "size": ["100%", "100%c"],
+          "controls": []
+        }
+      },
+      {
+        "description": {
+          "type": "panel",
+          "size": ["100%", 42],
+          "controls": [
+            {
+              "bg": {
+                "type": "image",
+                "anchor_from": "left_middle",
+                "anchor_to": "left_middle",
+                "size": ["100%", "100%"],
+                "texture": "textures/ui/chat/panel/description_background",
+                "controls": [
+                  {
+                    "desc": {
+                      "type": "label",
+                      "anchor_from": "center",
+                      "anchor_to": "center",
+                      "text_alignment": "center",
+                      "size": ["100%-14px", 30],
+                      "layer": 1,
+                      "font_size": "medium",
+                      "text": "Click on the dropdowns below to use a quick command!",
+                      "color": [0.9, 0.9, 0.9]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "c_divider@chat.div": {}
+      },
+      {
+        "teleport@chat.category": {
+          "$category": "Teleport",
+          "$content": [
+            {
+              "1@chat.command": {
+                "$command_tooltip": "Teleport to another player",
+                "$command": "/tpa"
+              }
+            },
+            {
+              "2@chat.command": {
+                "$command_tooltip": "Teleport another player to you",
+                "$command": "/tpahere"
+              }
+            },
+            {
+              "3@chat.command": {
+                "$command_tooltip": "Accept teleport request",
+                "$command": "/tpaccept"
+              }
+            },
+            {
+              "4@chat.command": {
+                "$command_tooltip": "Deny TP request",
+                "$command": "/tpdeny"
+              }
+            },
+            {
+              "5@chat.command": {
+                "$command_tooltip": "Return to spawn",
+                "$command": "/spawn"
+              }
+            },
+            {
+              "6@chat.command": {
+                "$command_tooltip": "Teleport to or create a home",
+                "$command": "/home"
+              }
+            },
+            {
+              "7@chat.command": {
+                "$command_tooltip": "Set a new home",
+                "$command": "/sethome"
+              }
+            },
+            {
+              "8@chat.command": {
+                "$command_tooltip": "Teleport to wilderness, nether, warzone, or end",
+                "$command": "/rtp"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "c_divider_1@chat.div": {}
+      },
+      {
+        "team@chat.category": {
+          "$category": "Team & Social",
+          "$content": [
+            {
+              "1@chat.command": {
+                "$command_tooltip": "Open main team menu",
+                "$command": "/team"
+              }
+            },
+            {
+              "2@chat.command": {
+                "$command_tooltip": "Join a team",
+                "$command": "/team join"
+              }
+            },
+            {
+              "3@chat.command": {
+                "$command_tooltip": "Teleport to team home",
+                "$command": "/team home"
+              }
+            },
+            {
+              "4@chat.command": {
+                "$command_tooltip": "Set your team's home here",
+                "$command": "/team sethome"
+              }
+            },
+            {
+              "5@chat.command": {
+                "$command_tooltip": "Toggle team chat",
+                "$command": "/team chat"
+              }
+            },
+            {
+              "6@chat.command": {
+                "$command_tooltip": "Level up your team",
+                "$command": "/team level"
+              }
+            },
+            {
+              "7@chat.command": {
+                "$command_tooltip": "Teams leaderboard",
+                "$command": "/team top"
+              }
+            },
+            {
+              "8@chat.command": {
+                "$command_tooltip": "Send a private msg to another player",
+                "$command": "/msg"
+              }
+            },
+            {
+              "9@chat.command": {
+                "$command_tooltip": "Reply to another player's private message",
+                "$command": "/reply"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "c_divider_2@chat.div": {}
+      },
+      {
+        "economy@chat.category": {
+          "$category": "Economy",
+          "$content": [
+            {
+              "1@chat.command": {
+                "$command_tooltip": "Send money or orebits to another player",
+                "$command": "/pay"
+              }
+            },
+            {
+              "2@chat.command": {
+                "$command_tooltip": "Check who is the richest",
+                "$command": "/baltop"
+              }
+            },
+            {
+              "3@chat.command": {
+                "$command_tooltip": "Sell items to the server",
+                "$command": "/shop"
+              }
+            },
+            {
+              "4@chat.command": {
+                "$command_tooltip": "Sell what you are holding",
+                "$command": "/sell hand"
+              }
+            },
+            {
+              "5@chat.command": {
+                "$command_tooltip": "Sell everything sellable in your inventory",
+                "$command": "/sell all"
+              }
+            },
+            {
+              "6@chat.command": {
+                "$command_tooltip": "Open the Item Market",
+                "$command": "/im"
+              }
+            },
+            {
+              "7@chat.command": {
+                "$command_tooltip": "List an item on the Item Market",
+                "$command": "/listitem"
+              }
+            },
+            {
+              "8@chat.command": {
+                "$command_tooltip": "Open the orebit store",
+                "$command": "/orebits"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "c_divider_3@chat.div": {}
+      },
+      {
+        "combat@chat.category": {
+          "$category": "Combat",
+          "$content": [
+            {
+              "1@chat.command": {
+                "$command_tooltip": "Enter a duel",
+                "$command": "/duels"
+              }
+            },
+            {
+              "2@chat.command": {
+                "$command_tooltip": "Collect or start a bounty",
+                "$command": "/bounty"
+              }
+            },
+            {
+              "3@chat.command": {
+                "$command_tooltip": "Prestige up",
+                "$command": "/prestige"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "c_divider_4@chat.div": {}
+      },
+      {
+        "store@chat.category": {
+          "$category": "Store and Rewards",
+          "$content": [
+            {
+              "1@chat.command": {
+                "$command_tooltip": "Access your player vaults",
+                "$command": "/vaults"
+              }
+            },
+            {
+              "2@chat.command": {
+                "$command_tooltip": "Access your wardrobe",
+                "$command": "/wardrobe"
+              }
+            },
+            {
+              "3@chat.command": {
+                "$command_tooltip": "Claim a kit",
+                "$command": "/kits"
+              }
+            },
+            {
+              "4@chat.command": {
+                "$command_tooltip": "Claim a free daily reward",
+                "$command": "/daily"
+              }
+            },
+            {
+              "5@chat.command": {
+                "$command_tooltip": "Open a bundle for money, kits, and more",
+                "$command": "/bundles"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "footer_div@chat.div": {}
+      },
+      {
+        "discord_button@pause.discord_button": {
+          "size": ["100%", "100%c"]
+        }
+      },
+      {
+        "padding@common.empty_panel": {
+          "size": [0, 2]
+        }
+      }
+    ]
+  },
+  "chat_screen@common.base_screen": {
+    "close_on_player_hurt": true,
+    "$screen_content": "chat.chat_screen_content",
+    "$screen_bg_content": "chat.chat_background"
+  },
+  "chat_bottom_panel": {
+    "modifications": [
+      {
+        "operation": "insert_after",
+        "control_name": "chat_settings",
+        "value": [
+          {
+            "togglepanel@common.empty_panel": {
+              "size": [27, 27],
+              "controls": [
+                {
+                  "mlogo@common.empty_image": {
+                    "size": [20, 20],
+                    "layer": 10,
+                    "texture": "textures/ui/chat/mlogo"
+                  }
+                },
+                {
+                  "open@chat.toggle": {
+                    "$toggle_group_forced_index": 0,
+                    "$unchecked_control": "common_toggles.toggle_unchecked",
+                    "$checked_control": "common_toggles.toggle_checked",
+                    "$unchecked_hover_control": "common_toggles.toggle_unchecked_hover",
+                    "$checked_hover_control": "common_toggles.toggle_checked_hover",
+                    "anchor_from": "center",
+                    "anchor_to": "center",
+                    "size": [27, 27],
+                    "$toggle_view_binding_name": "toggle_command_sidebar"
+                  }
+                }
+              ],
+              "bindings": [
+                {
+                  "binding_type": "view",
+                  "source_control_name": "toggle_command_sidebar",
+                  "source_property_name": "(not #toggle_state)",
+                  "target_property_name": "#visible"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "chat_screen_content": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "chat_panel@common.empty_panel": {
+          "size": ["fill", "100%"],
+          "controls": [
+            {
+              "background@common.input_panel": {
+                "prevent_touch_input": true,
+                "ignored": true,
+                "size": ["100%", "100%"],
+                "layer": 98,
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "toggle_command_sidebar",
+                    "source_property_name": "(#toggle_state)",
+                    "target_property_name": "#visible"
+                  }
+                ],
+                "controls": [
+                  {
+                    "clhose@chat.toggle": {
+                      "$toggle_view_binding_name": "close_command_sidebar",
+                      "$toggle_group_forced_index": 2,
+                      "size": ["100%", "100%"],
+                      "$toggle_texture": "textures/ui/chat/icon/close",
+                      "anchor_to": "top_left",
+                      "anchor_from": "top_left",
+                      "alpha": 0,
+                      "$sound_name": "random.chestclosed",
+                      "$sound_pitch": 1,
+                      "$sound_volume": 0.5,
+                      "propagate_alpha": true
+                    }
+                  },
+                  {
+                    "bg": {
+                      "type": "image",
+                      "alpha": 0.5,
+                      "texture": "textures/ui/Black"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "messages_panel@chat.messages_scrolling_panel": {}
+            },
+            {
+              "chat_bottom_panel@chat.chat_bottom_panel": {
+                "layer": 2
+              }
+            },
+            {
+              "chat_top_panel@chat.chat_header": {
+                "layer": 2
+              }
+            },
+            {
+              "new_messages_button@chat.new_messages_button": {
+                "layer": 3
+              }
+            },
+            {
+              "autocomplete_commands_panel@chat.commands_panel": {
+                "layer": 3
+              }
+            },
+            {
+              "host_main_panel@host_options.host_panel": {
+                "layer": 4
+              }
+            },
+            {
+              "popup_factory@chat_settings.popup_factory": {}
+            }
+          ]
+        }
+      },
+      {
+        "commands@chat.core": {}
+      }
+    ]
+  },
+  "white@common.empty_panel": {
+    "debug": "$debug",
+    "controls": [
+      {
+        "q@chat.image": {}
+      }
+    ]
+  },
+  "toggle@common_toggles.light_content_toggle": {
+    "$unchecked_control": "chat.image",
+    "$checked_control": "chat.white",
+    "$unchecked_hover_control": "chat.white",
+    "$checked_hover_control": "chat.white",
+    "$unchecked_pressed_control": "chat.white",
+    "$checked_pressed_control": "chat.white",
+    "$button_type_panel": "common.empty_panel",
+    "size": [20, 20],
+    "$size": ["100%-10px", "100%-10px"],
+    "$debug|default": "white",
+    "$radio_toggle_group": true,
+    "$toggle_name": "command_sidebar",
+    "consume_hover_events": false,
+    "$button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "button.panel_enter",
+        "mapping_type": "pressed",
+        "consume_event": false,
+        "input_mode_condition": "not_gamepad"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "button.panel_enter",
+        "mapping_type": "focused",
+        "consume_event": false,
+        "input_mode_condition": "gamepad_and_not_gaze"
+      }
+    ]
+  }
+}
